@@ -1,4 +1,7 @@
 import React, { useState, Suspense, lazy, Component, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../utils/firebase";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 const SPLINE_SCENE_URL =
@@ -75,6 +78,7 @@ const features = [
 ];
 
 function Login() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -114,7 +118,17 @@ function Login() {
         setIsLoading(true);
         setTimeout(() => setIsLoading(false), 2000);
     };
-
+    const handleLogin=async ()=>{
+        try{
+            const result=await signInWithPopup(auth,provider)
+            console.log(result)
+            navigate("/");
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
+    
     return (
         <div className="h-screen w-full flex overflow-hidden relative bg-black">
 
@@ -249,6 +263,7 @@ function Login() {
                     <div className="space-y-2">
                         {features.map((feat, i) => (
                             <div key={i}
+                                onClick={i === 0 ? handleLogin : undefined}
                                 className="rounded-xl p-3 cursor-pointer transition-all duration-300"
                                 style={{
                                     background: hoveredCard === i ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.015)",
