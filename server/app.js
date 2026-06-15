@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const authRouter = require('./Routes/auth.routes');
 require('dotenv').config();
 const app = express();
 
@@ -9,7 +11,7 @@ app.use(cors({
   credentials:true
 }));
 app.use(express.json());
-app.use(cookieParse())
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // Basic route
@@ -17,6 +19,6 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the interviewAI Server API' });
 });
 
-app.use("/api/auth",authRouter)
+app.use("/api/auth", authRouter);
 
 module.exports = app;

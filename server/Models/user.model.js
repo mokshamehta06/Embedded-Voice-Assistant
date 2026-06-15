@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { path } = require('../app')
 
 const pageSchema = new mongoose.Schema({
     name:String,
@@ -25,7 +24,7 @@ const userSchema = new mongoose.Schema({
     },
     assistantName:{
         type:String,
-        default:MyAssistant,
+        default:"MyAssistant",
     },
     businessName:{
         type:String,
@@ -111,4 +110,4 @@ const userSchema = new mongoose.Schema({
 
 const User=mongoose.model("User",userSchema)
 
-export default User;
+module.exports = User;

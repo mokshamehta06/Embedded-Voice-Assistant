@@ -2,6 +2,10 @@ import React, { useState, Suspense, lazy, Component, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../utils/firebase";
+import axios from "axios";
+import { SeverUrl } from "../App";
+
+
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 const SPLINE_SCENE_URL =
@@ -121,8 +125,19 @@ function Login() {
     const handleLogin=async ()=>{
         try{
             const result=await signInWithPopup(auth,provider)
-            console.log(result)
-            navigate("/");
+            const {displayName,email}=result.user
+            const res = await axios.post(
+                SeverUrl + "/api/auth/google",
+                {
+                    name: displayName,
+                    email
+                },
+                { withCredentials: true }
+            )
+            console.log(res.data)
+            if(res.status==200){
+                navigate("/");
+            }
         }
         catch(error){
             console.log(error)
@@ -155,14 +170,6 @@ function Login() {
                     style={{ background: "radial-gradient(circle, rgba(0,255,170,0.06), transparent 70%)" }} />
 
                 <div className="w-full max-w-md py-6">
-                    {/* Header */}
-                    <div className="mb-5">
-                        <h1 className="text-3xl font-bold text-white tracking-tight">
-                            AURA <span className="font-light text-white/40">Portal</span>
-                        </h1>
-                        <p className="text-white/25 text-xs mt-1.5 tracking-wide">Your Intelligent Voice Assistant</p>
-                    </div>
-
                     {/* Login card */}
                     <div className="rounded-2xl p-5 relative"
                         style={{
