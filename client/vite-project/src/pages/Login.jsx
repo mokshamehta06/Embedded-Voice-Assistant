@@ -4,6 +4,7 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../utils/firebase";
 import axios from "axios";
 import { SeverUrl } from "../App";
+import toast from "react-hot-toast";
 
 
 
@@ -81,7 +82,7 @@ const features = [
     },
 ];
 
-function Login() {
+function Login({ setUser }) {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -136,11 +137,14 @@ function Login() {
             )
             console.log(res.data)
             if(res.status==200){
+                setUser(res.data);
+                toast.success("Login successful! Welcome back 🎉");
                 navigate("/");
             }
         }
         catch(error){
             console.log(error)
+            toast.error("Login failed. Please try again.");
         }
     }
     

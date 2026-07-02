@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react"
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, Navigate } from "react-router-dom"
 import Home from "./pages/Home.jsx"
 import Login from "./pages/Login.jsx"
-import axios from "axios"
-import { linkWithCredential } from "firebase/auth"
+import Billing from "./pages/Billing.jsx"
+import Builder from "./pages/Buider.jsx"
+import Navbar from "./components/Navbar.jsx"
 import ProtectedRoute from "./components/ProtectedRoute.jsx"
+import axios from "axios"
+import { Toaster } from "react-hot-toast"
 
 export const SeverUrl = "http://localhost:5000"
 function App() {
@@ -30,10 +33,11 @@ function App() {
   }, []);
   return (
     <>
+    <Toaster position="top-right"/>
       <Routes>
         <Route path='/login' element={<Login setUser={setUser} />} />
         <Route path='/*' element={<ProtectedRoute user={user} loading={loading}>
-          <Navbar setUser={setUser} />
+          <Navbar user={user} setUser={setUser} />
           <Routes>
             <Route path='/' element={<Home user={user} />} />
             <Route path='/billing' element={<Billing user={user} />} />
