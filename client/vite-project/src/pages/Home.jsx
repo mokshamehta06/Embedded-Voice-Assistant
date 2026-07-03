@@ -6,15 +6,13 @@ function Home({ user }) {
     const navigate = useNavigate();
 
     return (
-        <div
-            className="min-h-screen w-full relative overflow-hidden"
+        <div className="min-h-screen w-full relative overflow-hidden"
             style={{
                 background: "linear-gradient(180deg, #08080c 0%, #0a0c14 50%, #08080c 100%)",
             }}
         >
             {/* ── Ambient glows ── */}
-            <div
-                className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full blur-3xl pointer-events-none opacity-20"
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full blur-3xl pointer-events-none opacity-20"
                 style={{
                     background:
                         "radial-gradient(circle, rgba(0,255,170,0.08), rgba(6,182,212,0.04), transparent 70%)",
@@ -46,8 +44,7 @@ function Home({ user }) {
                         animation: "fadeUp 0.5s ease-out both",
                     }}
                 >
-                    <div
-                        className="w-2 h-2 rounded-full"
+                    <div className="w-2 h-2 rounded-full"
                         style={{
                             background: "#00ffaa",
                             boxShadow: "0 0 8px rgba(0,255,170,0.5)",
@@ -417,7 +414,7 @@ function Home({ user }) {
                                 className="text-[14px] font-semibold"
                                 style={{ color: "rgba(255,255,255,0.85)" }}
                             >
-                                Shifra{" "}
+                                Assistant{" "}
                                 <span style={{ color: "#00ffaa" }}>AI</span>
                             </span>
                             <p
@@ -428,18 +425,14 @@ function Home({ user }) {
                             </p>
                         </div>
                     </div>
-
-                    {/* Right: Copyright */}
                     <p
                         className="text-[11px]"
                         style={{ color: "rgba(255,255,255,0.25)" }}
                     >
-                        © 2026 ShifraAI. All rights reserved.
+                        © 2026 AssistantAI. All rights reserved.
                     </p>
                 </div>
             </footer>
-
-            {/* Keyframes */}
             <style>{`
                 @keyframes fadeUp {
                     from { opacity: 0; transform: translateY(16px); }
