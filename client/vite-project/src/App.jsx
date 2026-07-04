@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar.jsx"
 import ProtectedRoute from "./components/ProtectedRoute.jsx"
 import axios from "axios"
 import { Toaster } from "react-hot-toast"
-
+export const ClientUrl="http://localhost:5173"
 export const SeverUrl = "http://localhost:5000"
 function App() {
   const [user, setUser] = useState(null)

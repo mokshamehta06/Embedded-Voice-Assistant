@@ -54,16 +54,7 @@ function Navbar({ user, setUser }) {
                     {/* ── Left: Version + Logo + Brand ── */}
                     <div className="flex items-center gap-3">
                         {/* Version badge */}
-                        <span
-                            className="text-[11px] font-mono px-2 py-0.5 rounded"
-                            style={{
-                                color: "#00ffaa",
-                                background: "rgba(0,255,170,0.08)",
-                                border: "1px solid rgba(0,255,170,0.15)",
-                            }}
-                        >
-                            1.00
-                        </span>
+                       
 
                         {/* Logo icon */}
                         <div
@@ -92,8 +83,8 @@ function Navbar({ user, setUser }) {
                         {/* Brand name */}
                         <span className="text-[15px] font-semibold tracking-tight"
                             style={{ color: "rgba(255,255,255,0.9)" }}>
-                            Shifra{" "}
-                            <span style={{ color: "#00ffaa" }}>AI</span>
+                            AI Assistant{" "}
+                            <span style={{ color: "#00ffaa" }}></span>
                         </span>
                     </div>
 

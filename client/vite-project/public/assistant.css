@@ -1,0 +1,746 @@
+/* ═══════════════════════════════════════════════════════
+   Embedded Voice Assistant — Widget Stylesheet
+   Dark glassmorphic design with gradient accents
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Reset ── */
+.voiceass,
+.voiceass *,
+.voiceass *::before,
+.voiceass *::after,
+.voiceass-trigger {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   TRIGGER BUTTON (floating)
+   ═══════════════════════════════════════════════════════ */
+
+.voiceass-trigger {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    z-index: 999998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #00ffaa, #06d6a0, #06b6d4);
+    color: #08080c;
+    box-shadow:
+        0 0 30px rgba(0, 255, 170, 0.2),
+        0 0 60px rgba(0, 255, 170, 0.05),
+        0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: va-scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.voiceass-trigger:hover {
+    transform: scale(1.08) translateY(-2px);
+    box-shadow:
+        0 0 40px rgba(0, 255, 170, 0.35),
+        0 0 80px rgba(0, 255, 170, 0.1),
+        0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.voiceass-trigger:active {
+    transform: scale(0.95);
+}
+
+.voiceass-trigger svg {
+    width: 24px;
+    height: 24px;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   WIDGET CONTAINER
+   ═══════════════════════════════════════════════════════ */
+
+.voiceass {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 380px;
+    height: 580px;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 999999;
+    animation: va-slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+
+/* ═══════════════════ THEME: DARK ═══════════════════ */
+
+.voiceass.theme-dark {
+    background: linear-gradient(180deg, #0c0a1a 0%, #08080c 100%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+        0 8px 60px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.03),
+        0 0 80px rgba(139, 92, 246, 0.04);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+
+/* ═══════════════════ THEME: LIGHT ═══════════════════ */
+
+.voiceass.theme-light {
+    background: linear-gradient(180deg, #f8f9fc 0%, #ffffff 100%);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.85);
+}
+
+
+/* ═══════════════════ THEME: GLASS ═══════════════════ */
+
+.voiceass.theme-glass {
+    background: rgba(8, 8, 12, 0.65);
+    backdrop-filter: blur(40px) saturate(1.4);
+    -webkit-backdrop-filter: blur(40px) saturate(1.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 8px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+
+/* ═══════════════════ THEME: NEON ═══════════════════ */
+
+.voiceass.theme-neon {
+    background: linear-gradient(180deg, #0c0a1a 0%, #08080c 100%);
+    border: 1px solid rgba(0, 255, 170, 0.2);
+    box-shadow:
+        0 0 30px rgba(0, 255, 170, 0.08),
+        0 0 80px rgba(0, 255, 170, 0.03),
+        0 8px 40px rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════════════════ */
+
+.va-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.va-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+}
+
+.voiceass.theme-neon .va-header::after {
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 170, 0.12), rgba(139, 92, 246, 0.1), transparent);
+}
+
+.voiceass.theme-light .va-header::after {
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
+}
+
+.va-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.va-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00ffaa;
+    box-shadow: 0 0 8px rgba(0, 255, 170, 0.5);
+    animation: va-pulse 2s ease-in-out infinite;
+}
+
+.voiceass.theme-light .va-status-dot {
+    background: #059669;
+    box-shadow: 0 0 8px rgba(5, 150, 105, 0.4);
+}
+
+.va-header-title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.voiceass.theme-dark .va-header-title,
+.voiceass.theme-glass .va-header-title,
+.voiceass.theme-neon .va-header-title {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.voiceass.theme-light .va-header-title {
+    color: rgba(0, 0, 0, 0.88);
+}
+
+/* Close Button */
+.va-close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+}
+
+.va-close-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.25);
+    color: #ef4444;
+}
+
+.voiceass.theme-light .va-close-btn {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(0, 0, 0, 0.03);
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.voiceass.theme-light .va-close-btn:hover {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   BODY (main content area)
+   ═══════════════════════════════════════════════════════ */
+
+.va-body {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Scrollbar */
+.va-body::-webkit-scrollbar { width: 4px; }
+.va-body::-webkit-scrollbar-track { background: transparent; }
+.va-body::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.06); border-radius: 4px; }
+.va-body::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.12); }
+
+
+/* ═══════════════════════════════════════════════════════
+   WELCOME SCREEN
+   ═══════════════════════════════════════════════════════ */
+
+.va-welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 30px;
+    flex: 1;
+    text-align: center;
+}
+
+/* ── Gradient Orb ── */
+.va-orb {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 28px;
+    position: relative;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(6, 182, 212, 0.2));
+    animation: va-orbFloat 4s ease-in-out infinite;
+}
+
+.va-orb-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9, #7c3aed);
+    box-shadow:
+        0 0 40px rgba(139, 92, 246, 0.4),
+        0 0 80px rgba(139, 92, 246, 0.15),
+        inset 0 -8px 16px rgba(0, 0, 0, 0.2),
+        inset 0 8px 16px rgba(255, 255, 255, 0.1);
+}
+
+.voiceass.theme-light .va-orb {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.1));
+}
+
+.voiceass.theme-light .va-orb-inner {
+    box-shadow:
+        0 0 40px rgba(139, 92, 246, 0.25),
+        0 0 80px rgba(139, 92, 246, 0.08);
+}
+
+/* ── Welcome Text ── */
+.va-welcome-title {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+}
+
+.voiceass.theme-dark .va-welcome-title,
+.voiceass.theme-glass .va-welcome-title,
+.voiceass.theme-neon .va-welcome-title {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.voiceass.theme-light .va-welcome-title {
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.va-welcome-sub {
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.voiceass.theme-dark .va-welcome-sub,
+.voiceass.theme-glass .va-welcome-sub {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.voiceass.theme-neon .va-welcome-sub {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.voiceass.theme-light .va-welcome-sub {
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.va-welcome-cta {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.voiceass.theme-dark .va-welcome-cta,
+.voiceass.theme-glass .va-welcome-cta,
+.voiceass.theme-neon .va-welcome-cta {
+    color: #00ffaa;
+    text-shadow: 0 0 20px rgba(0, 255, 170, 0.3);
+}
+
+.voiceass.theme-light .va-welcome-cta {
+    color: #059669;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   MESSAGES
+   ═══════════════════════════════════════════════════════ */
+
+.va-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.va-msg {
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 10px 14px;
+    border-radius: 14px;
+    max-width: 82%;
+    animation: va-fadeIn 0.3s ease both;
+    word-wrap: break-word;
+}
+
+/* AI message */
+.va-msg-ai {
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+.voiceass.theme-dark .va-msg-ai,
+.voiceass.theme-glass .va-msg-ai {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.voiceass.theme-neon .va-msg-ai {
+    background: rgba(0, 255, 170, 0.04);
+    border: 1px solid rgba(0, 255, 170, 0.08);
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.voiceass.theme-light .va-msg-ai {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* User message */
+.va-msg-user {
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+.voiceass.theme-dark .va-msg-user,
+.voiceass.theme-glass .va-msg-user {
+    background: rgba(139, 92, 246, 0.12);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.voiceass.theme-neon .va-msg-user {
+    background: linear-gradient(135deg, rgba(0, 255, 170, 0.1), rgba(6, 182, 212, 0.08));
+    border: 1px solid rgba(0, 255, 170, 0.18);
+    color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 12px rgba(0, 255, 170, 0.05);
+}
+
+.voiceass.theme-light .va-msg-user {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    border: none;
+    color: #fff;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   TYPING INDICATOR
+   ═══════════════════════════════════════════════════════ */
+
+.va-typing {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 12px 16px;
+    align-self: flex-start;
+    border-radius: 14px;
+    border-bottom-left-radius: 4px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.voiceass.theme-light .va-typing {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.va-typing span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #8b5cf6;
+    opacity: 0.5;
+    animation: va-bounce 1.4s ease-in-out infinite;
+}
+
+.va-typing span:nth-child(2) { animation-delay: 0.2s; }
+.va-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+.voiceass.theme-neon .va-typing span {
+    background: #00ffaa;
+}
+
+.voiceass.theme-light .va-typing span {
+    background: #8b5cf6;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   FOOTER (Input + Buttons)
+   ═══════════════════════════════════════════════════════ */
+
+.va-footer {
+    padding: 12px 16px 16px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+.va-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+}
+
+.voiceass.theme-neon .va-footer::before {
+    background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.12), transparent);
+}
+
+.voiceass.theme-light .va-footer::before {
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.06), transparent);
+}
+
+/* Input row */
+.va-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    border-radius: 14px;
+    padding: 4px 4px 4px 16px;
+}
+
+.voiceass.theme-dark .va-input-wrap,
+.voiceass.theme-glass .va-input-wrap {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.voiceass.theme-neon .va-input-wrap {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(139, 92, 246, 0.12);
+}
+
+.voiceass.theme-light .va-input-wrap {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.va-input-wrap:focus-within {
+    border-color: rgba(139, 92, 246, 0.3);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.06);
+}
+
+.va-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    padding: 8px 0;
+    min-width: 0;
+}
+
+.voiceass.theme-dark .va-input,
+.voiceass.theme-glass .va-input,
+.voiceass.theme-neon .va-input {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.voiceass.theme-dark .va-input::placeholder,
+.voiceass.theme-glass .va-input::placeholder,
+.voiceass.theme-neon .va-input::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.voiceass.theme-light .va-input {
+    color: rgba(0, 0, 0, 0.85);
+}
+
+.voiceass.theme-light .va-input::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+/* Send button */
+.va-send-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: #fff;
+    box-shadow: 0 0 16px rgba(139, 92, 246, 0.2);
+}
+
+.voiceass.theme-neon .va-send-btn {
+    background: linear-gradient(135deg, #00ffaa, #06d6a0);
+    color: #08080c;
+    box-shadow: 0 0 16px rgba(0, 255, 170, 0.2);
+}
+
+.va-send-btn:hover {
+    box-shadow: 0 0 24px rgba(139, 92, 246, 0.35);
+    transform: scale(1.05);
+}
+
+.va-send-btn:active {
+    transform: scale(0.95);
+}
+
+
+/* ── Mic Button ── */
+.va-mic-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    color: #fff;
+    box-shadow:
+        0 0 30px rgba(139, 92, 246, 0.3),
+        0 0 60px rgba(139, 92, 246, 0.1);
+}
+
+.voiceass.theme-neon .va-mic-btn {
+    background: linear-gradient(135deg, #00ffaa, #06d6a0);
+    color: #08080c;
+    box-shadow:
+        0 0 30px rgba(0, 255, 170, 0.3),
+        0 0 60px rgba(0, 255, 170, 0.1);
+}
+
+.voiceass.theme-light .va-mic-btn {
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    color: #fff;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+.va-mic-btn:hover {
+    transform: scale(1.08);
+    box-shadow:
+        0 0 40px rgba(139, 92, 246, 0.4),
+        0 0 80px rgba(139, 92, 246, 0.15);
+}
+
+.va-mic-btn:active {
+    transform: scale(0.92);
+}
+
+/* Listening state */
+.va-mic-btn.listening {
+    animation: va-micPulse 1.5s ease-in-out infinite;
+    box-shadow:
+        0 0 40px rgba(139, 92, 246, 0.5),
+        0 0 80px rgba(139, 92, 246, 0.2);
+}
+
+.voiceass.theme-neon .va-mic-btn.listening {
+    box-shadow:
+        0 0 40px rgba(0, 255, 170, 0.5),
+        0 0 80px rgba(0, 255, 170, 0.2);
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════ */
+
+@media (max-width: 440px) {
+    .voiceass {
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .voiceass-trigger {
+        bottom: 16px;
+        right: 16px;
+    }
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════ */
+
+@keyframes va-slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes va-scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes va-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes va-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+@keyframes va-bounce {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    30% {
+        transform: translateY(-6px);
+        opacity: 1;
+    }
+}
+
+@keyframes va-orbFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes va-micPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}

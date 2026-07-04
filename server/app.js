@@ -8,8 +8,12 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin:"http://localhost:5173",
-  credentials:true
+  origin: function (origin, callback) {
+    // Allow requests with no origin (e.g. server-to-server, curl)
+    // or any origin for assistant-config public endpoint
+    callback(null, true);
+  },
+  credentials: true
 }));
 app.use(express.json());
 app.use(cookieParser());
