@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════════════════
-   Embedded Voice Assistant — Widget Stylesheet
-   Dark glassmorphic design with gradient accents
-   ═══════════════════════════════════════════════════════ */
-
-/* ── Reset ── */
 .voiceass,
 .voiceass *,
 .voiceass *::before,
@@ -14,12 +8,9 @@
     box-sizing: border-box;
     font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
-
-
 /* ═══════════════════════════════════════════════════════
    TRIGGER BUTTON (floating)
    ═══════════════════════════════════════════════════════ */
-
 .voiceass-trigger {
     position: fixed;
     bottom: 24px;
@@ -42,7 +33,6 @@
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     animation: va-scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
-
 .voiceass-trigger:hover {
     transform: scale(1.08) translateY(-2px);
     box-shadow:
@@ -50,16 +40,13 @@
         0 0 80px rgba(0, 255, 170, 0.1),
         0 8px 30px rgba(0, 0, 0, 0.3);
 }
-
 .voiceass-trigger:active {
     transform: scale(0.95);
 }
-
 .voiceass-trigger svg {
     width: 24px;
     height: 24px;
 }
-
 
 /* ═══════════════════════════════════════════════════════
    WIDGET CONTAINER
@@ -289,6 +276,16 @@
         0 0 80px rgba(139, 92, 246, 0.15),
         inset 0 -8px 16px rgba(0, 0, 0, 0.2),
         inset 0 8px 16px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.va-orb-inner.listening-orb {
+    animation: va-micPulse 1.5s ease-in-out infinite;
+    box-shadow:
+        0 0 50px rgba(139, 92, 246, 0.6),
+        0 0 100px rgba(139, 92, 246, 0.3),
+        inset 0 -8px 16px rgba(0, 0, 0, 0.2),
+        inset 0 8px 16px rgba(255, 255, 255, 0.2);
 }
 
 .voiceass.theme-light .va-orb {

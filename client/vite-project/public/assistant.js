@@ -10,6 +10,8 @@
     const SERVER_URL = "http://localhost:5000";
     const CLIENT_URL = "http://localhost:5173";
 
+    let assistantConfig = null;
+
     // Load CSS
     const link = document.createElement("link");
     link.href = CLIENT_URL + "/assistant.css";
@@ -172,20 +174,34 @@
                     var transcript = event.results[0][0].transcript;
                     input.value = transcript;
                     micBtn.classList.remove("listening");
+                    var ctaText = widget.querySelector(".va-welcome-cta");
+                    if (ctaText) ctaText.textContent = "Tap button to Speak";
+                    var orbInner = widget.querySelector(".va-orb-inner");
+                    if (orbInner) orbInner.classList.remove("listening-orb");
                     sendMessage();
                 };
 
                 recognition.onerror = function () {
                     micBtn.classList.remove("listening");
+                    var ctaText = widget.querySelector(".va-welcome-cta");
+                    if (ctaText) ctaText.textContent = "Tap button to Speak";
+                    var orbInner = widget.querySelector(".va-orb-inner");
+                    if (orbInner) orbInner.classList.remove("listening-orb");
                 };
 
                 recognition.onend = function () {
                     micBtn.classList.remove("listening");
+                    var ctaText = widget.querySelector(".va-welcome-cta");
+                    if (ctaText) ctaText.textContent = "Tap button to Speak";
+                    var orbInner = widget.querySelector(".va-orb-inner");
+                    if (orbInner) orbInner.classList.remove("listening-orb");
                 };
             }
 
             if (micBtn) {
                 micBtn.addEventListener("click", function () {
+                    var ctaText = widget.querySelector(".va-welcome-cta");
+                    var orbInner = widget.querySelector(".va-orb-inner");
                     if (!recognition) {
                         alert("Speech recognition is not supported in this browser.");
                         return;
@@ -193,12 +209,35 @@
                     if (micBtn.classList.contains("listening")) {
                         recognition.stop();
                         micBtn.classList.remove("listening");
+                        if (ctaText) ctaText.textContent = "Tap button to Speak";
+                        if (orbInner) orbInner.classList.remove("listening-orb");
                     } else {
                         recognition.start();
                         micBtn.classList.add("listening");
+                        if (ctaText) ctaText.textContent = "Listening...";
+                        if (orbInner) orbInner.classList.add("listening-orb");
                     }
                 });
             }
         }
     }
+
+    //load assistant
+    const loadAssistant = async () => {
+        try {
+            const response = await fetch(`${SERVER_URL}/api/assistant/assistant-config/${userId}`);
+            const data = await response.json();
+            console.log(data);
+
+            if (data) {thi
+                assistantConfig = data.user;
+            }
+        } catch (error) {
+            console.log(
+                "Assistant Load Error:",
+                error
+            );
+        }
+    };
+    loadAssistant();
 })();
