@@ -6,7 +6,6 @@ const googleAuth = async (req, res) => {
         const { name, email } = req.body
         if (!name || !email) {
             return res.status(400).json({ message: "Name and Email are required" })
-
         }
         let user = await User.findOne({ email })
         if (!user) {
@@ -26,7 +25,6 @@ const googleAuth = async (req, res) => {
         return res.status(500).json({ message: `Google auth error ${error}` })
     }
 }
-
 const logout = async (req, res) => {
     try {
         await res.clearCookie("token", {
@@ -41,7 +39,6 @@ const logout = async (req, res) => {
         return res.status(500).json({ message: `Logout Failed` })
     }
 }
-
 module.exports = {
     googleAuth,
     logout

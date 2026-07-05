@@ -5,8 +5,7 @@ const isAuth = async (req,res,next) => {
         const token = req.cookies.token;
         if (!token){
             return res.status(401).json({message:"Unauthorized"});
-        } 
-
+        }
         const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
         if(!verifyToken){
             return res.status(401).json({message:"doesnt have valid token"});
@@ -19,5 +18,4 @@ const isAuth = async (req,res,next) => {
         return res.status(500).json({message:"Internal Server Error"});
     }
 }
-
 module.exports = isAuth;

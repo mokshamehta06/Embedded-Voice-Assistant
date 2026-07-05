@@ -12,7 +12,6 @@ const getCurrent = async (req,res) => {
         return res.status(500).json({message:"Internal Server Error"});
     }
 }
-
 const getAssistantConfig = async (req, res) => {
     try {
         const user = await User.findById(req.params.userId).select(
@@ -27,7 +26,6 @@ const getAssistantConfig = async (req, res) => {
         return res.status(500).json({ message: "Internal Server Error" });
     }
 }
-
 const saveAssistant = async (req, res) => {
     try {
         const {
@@ -68,5 +66,4 @@ const saveAssistant = async (req, res) => {
         return res.status(500).json({message:"Internal Server Error"});
     }
 }
-
 module.exports = {getCurrent, saveAssistant, getAssistantConfig};

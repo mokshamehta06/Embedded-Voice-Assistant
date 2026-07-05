@@ -13,21 +13,15 @@ const privateCors = cors({
     ],
     credentials:true
   })
-
-
-  const publicCors = cors({
+const publicCors = cors({
     origin:"*",
-  })
-  
+})
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
-
-// Basic route
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the interviewAI Server API' });
 });
-
 app.use("/api/auth",privateCors, authRouter);
 app.use("/api/user",privateCors, userRouter);
 app.use("/api/assistant",publicCors, assistantRoute);

@@ -1,7 +1,6 @@
 const Gemini_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key="
 
 module.exports = Gemini_URL;
-
 const generateGeminiResponse = async ({
     prompt,
     apiKey,
@@ -26,7 +25,6 @@ const generateGeminiResponse = async ({
                 ]
             })
         })
-
        if(!response.ok){
         if(
             response.status === 400 || 
