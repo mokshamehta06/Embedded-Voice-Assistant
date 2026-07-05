@@ -1,6 +1,5 @@
-const Gemini_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key="
+const Gemini_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key="
 
-module.exports = Gemini_URL;
 const generateGeminiResponse = async ({
     prompt,
     apiKey,
@@ -10,7 +9,7 @@ const generateGeminiResponse = async ({
         if(!apiKey){
             throw new Error("Gemini API key Missing")
         }
-        const response = await fetch(`${Gemini_URL}?key=${apiKey}`,{
+        const response = await fetch(`${Gemini_URL}${apiKey}`,{
             method:"POST",
             headers :{
                 "Content-Type" : "application/json",
@@ -48,7 +47,7 @@ const generateGeminiResponse = async ({
        "active";
        await user.save();
        const data =await response.json();
-       const text = data.cadidates?.[0]?.content?.parts?.[0]?.text;
+       const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
        if(!text){
         throw new Error("No valid response from Gemini")
        }
@@ -59,3 +58,5 @@ const generateGeminiResponse = async ({
         throw error;
     }
 }
+
+module.exports = { generateGeminiResponse, Gemini_URL };

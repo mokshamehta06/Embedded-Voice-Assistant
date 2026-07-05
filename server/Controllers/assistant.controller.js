@@ -5,7 +5,11 @@ const getAssistantConfig = async (req, res) => {
     try {
         const { userId } = req.params;
 
-        const user = await User.findById(userId).select("geminiApiKey");
+        // Select the fields the widget needs to build itself. 
+        // We do NOT send geminiApiKey to the public frontend for security!
+        const user = await User.findById(userId).select(
+            "assistantName businessName businessType businessDescription tone theme enableVoice enableNavigation pages"
+        );
 
         if (!user) {
             return res.status(404).json({ message: "User not found" });
@@ -17,8 +21,11 @@ const getAssistantConfig = async (req, res) => {
         });
 
     } catch (err) {
-        console.log(err);
-        return res.status(500).json({ message: "Internal Server Error" });
+        console.log("getAssistantConfig error:", err);
+        if (err.name === 'CastError') {
+            return res.status(400).json({ message: "Invalid user ID format" });
+        }
+        return res.status(500).json({ message: err.message || "Internal Server Error" });
     }
 };
 
@@ -147,9 +154,9 @@ ${message}
         });
 
     } catch (error) {
-        console.log(error);
+        console.log("askAssistant error:", error);
         return res.status(500).json({
-            message: "Internal Server Error",
+            message: error.message || "Internal Server Error",
         });
     }
 };

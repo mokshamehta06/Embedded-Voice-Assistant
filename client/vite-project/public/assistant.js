@@ -24,10 +24,11 @@
     font.rel = "stylesheet";
     document.head.appendChild(font);
 
-    // Fetch assistant config from server
-    fetch(SERVER_URL + "/api/user/assistant-config/" + userId)
+    // Fetch assistant config from server (using the public route)
+    fetch(SERVER_URL + "/api/assistant/assistant-config/" + userId)
         .then(function (res) { return res.json(); })
-        .then(function (config) {
+        .then(function (data) {
+            const config = data.user || data; // handle both data shapes just in case
             if (!config || !config.assistantName) {
                 console.error("[VoiceAssistant] Invalid config:", config);
                 return;
@@ -121,10 +122,11 @@
             var text = input.value.trim();
             if (!text) return;
 
-            // Hide welcome on first message
-            if (welcomeDiv) {
-                welcomeDiv.style.display = "none";
-            }
+            // Hide only title and subtitle so orb and status remain visible
+            var title = widget.querySelector(".va-welcome-title");
+            var sub = widget.querySelector(".va-welcome-sub");
+            if (title) title.style.display = "none";
+            if (sub) sub.style.display = "none";
 
             // Add user message
             var userMsg = document.createElement("div");
@@ -136,22 +138,39 @@
             // Scroll to bottom
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
-            // TODO: Send to AI backend and display response
-            // For now show a placeholder response
+            // Send to AI backend and display response
             var typing = document.createElement("div");
             typing.className = "va-typing";
             typing.innerHTML = '<span></span><span></span><span></span>';
             messagesDiv.appendChild(typing);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
-            setTimeout(function () {
+            fetch(SERVER_URL + "/api/assistant/ask-assistant", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: text, userId: userId })
+            })
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
                 typing.remove();
                 var aiMsg = document.createElement("div");
                 aiMsg.className = "va-msg va-msg-ai";
-                aiMsg.textContent = "I'm here to help! This feature is coming soon.";
+                aiMsg.textContent = data.response || data.message || "No response";
                 messagesDiv.appendChild(aiMsg);
                 messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            }, 1500);
+                
+                // Call speak function with the AI response!
+                if (typeof speak === "function") {
+                    speak(aiMsg.textContent);
+                }
+            })
+            .catch(function(err) {
+                typing.remove();
+                var aiMsg = document.createElement("div");
+                aiMsg.className = "va-msg va-msg-ai";
+                aiMsg.textContent = "Failed to connect to assistant.";
+                messagesDiv.appendChild(aiMsg);
+            });
         }
 
         sendBtn.addEventListener("click", sendMessage);
@@ -170,23 +189,27 @@
                 recognition.continuous = false;
                 recognition.interimResults = false;
 
-                recognition.onresult = function (event) {
-                    var transcript = event.results[0][0].transcript;
-                    input.value = transcript;
+                recognition.onresult = (e) => {
+                    const text = e.results[0][0].transcript;
+                    input.value = text;
+                    
                     micBtn.classList.remove("listening");
                     var ctaText = widget.querySelector(".va-welcome-cta");
                     if (ctaText) ctaText.textContent = "Tap button to Speak";
                     var orbInner = widget.querySelector(".va-orb-inner");
-                    if (orbInner) orbInner.classList.remove("listening-orb");
+                    if (orbInner) orbInner.style.opacity = "0";
+                    
+                    recognition.stop();
                     sendMessage();
                 };
 
-                recognition.onerror = function () {
+                recognition.onerror = function (event) {
+                    console.error("Speech Recognition Error:", event.error);
                     micBtn.classList.remove("listening");
                     var ctaText = widget.querySelector(".va-welcome-cta");
                     if (ctaText) ctaText.textContent = "Tap button to Speak";
                     var orbInner = widget.querySelector(".va-orb-inner");
-                    if (orbInner) orbInner.classList.remove("listening-orb");
+                    if (orbInner) orbInner.style.opacity = "0";
                 };
 
                 recognition.onend = function () {
@@ -194,7 +217,7 @@
                     var ctaText = widget.querySelector(".va-welcome-cta");
                     if (ctaText) ctaText.textContent = "Tap button to Speak";
                     var orbInner = widget.querySelector(".va-orb-inner");
-                    if (orbInner) orbInner.classList.remove("listening-orb");
+                    if (orbInner) orbInner.style.opacity = "0";
                 };
             }
 
@@ -210,12 +233,12 @@
                         recognition.stop();
                         micBtn.classList.remove("listening");
                         if (ctaText) ctaText.textContent = "Tap button to Speak";
-                        if (orbInner) orbInner.classList.remove("listening-orb");
+                        if (orbInner) orbInner.style.opacity = "0";
                     } else {
                         recognition.start();
                         micBtn.classList.add("listening");
                         if (ctaText) ctaText.textContent = "Listening...";
-                        if (orbInner) orbInner.classList.add("listening-orb");
+                        if (orbInner) orbInner.style.opacity = "1";
                     }
                 });
             }
@@ -229,7 +252,7 @@
             const data = await response.json();
             console.log(data);
 
-            if (data) {thi
+            if (data) {
                 assistantConfig = data.user;
             }
         } catch (error) {
@@ -240,4 +263,42 @@
         }
     };
     loadAssistant();
+    // text-speech
+    const speak = (text) => {
+        window.speechSynthesis.cancel();
+        
+        // Map tutorial variables to your HTML classes
+        const aiText = document.querySelector(".va-msg-ai:last-child"); 
+        const status = document.querySelector(".va-welcome-cta");
+        const wave = document.querySelector(".va-orb-inner");
+
+        // Show AI response
+        if (aiText) {
+            aiText.innerText = text;
+        }
+        
+        if (status) {
+            status.innerText = "AI Speaking...";
+        }
+
+        const speech = new SpeechSynthesisUtterance(text);
+        
+        speech.lang = "hi-IN";
+        speech.rate = 1;
+        speech.pitch = 1;
+        speech.volume = 1;
+
+        // Voice end
+        speech.onend = () => {
+            if (status) {
+                status.innerText = "Tap button to Speak";
+            }
+            if (wave) {
+                wave.style.opacity = "0";
+            }
+        };
+
+        // Start speaking
+        window.speechSynthesis.speak(speech);
+    };
 })();

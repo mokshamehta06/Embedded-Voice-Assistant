@@ -37,10 +37,10 @@ const userSchema = new mongoose.Schema({
         default:""
     },
     tone:{
-        type:String,
-        emum:[
+          type:String,
+        enum:[
            "friendly",
-           "professsional",
+           "professional",
            "sales", 
         ],
         default:"friendly"

@@ -8,11 +8,11 @@ const getCurrent = async (req,res) => {
         }
         return res.status(200).json(user)
     }catch(error){
-        console.log(error);
-        return res.status(500).json({message:"Internal Server Error"});
+        console.log("user.controller getCurrent error:", error);
+        return res.status(500).json({message: error.message || "Internal Server Error"});
     }
 }
-const getAssistantConfig = async (req, res) => {
+    const getAssistantConfig = async (req, res) => {
     try {
         const user = await User.findById(req.params.userId).select(
             'assistantName businessName businessType businessDescription tone theme enableVoice enableNavigation pages'
@@ -22,8 +22,11 @@ const getAssistantConfig = async (req, res) => {
         }
         return res.status(200).json(user);
     } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Internal Server Error" });
+        console.log("user.controller getAssistantConfig error:", error);
+        if (error.name === 'CastError') {
+            return res.status(400).json({ message: "Invalid user ID format" });
+        }
+        return res.status(500).json({ message: error.message || "Internal Server Error" });
     }
 }
 const saveAssistant = async (req, res) => {
