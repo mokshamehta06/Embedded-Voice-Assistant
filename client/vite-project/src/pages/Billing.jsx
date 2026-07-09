@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { SeverUrl } from "../App";
 
 function Billing() {
     const [selectedPlan, setSelectedPlan] = useState("pro");
@@ -72,6 +74,61 @@ function Billing() {
         { id: "INV-002", date: "May 2026", amount: "$0.00", status: "Free", plan: "Free" },
         { id: "INV-003", date: "Apr 2026", amount: "$0.00", status: "Free", plan: "Free" },
     ];
+    const handlePay = async () => {
+        try {
+            const response = await axios.post(
+                `${SeverUrl}/api/billing/create-order`,
+                { plan: selectedPlan },
+                { withCredentials: true }
+            );
+
+            const data = response.data;
+            if (!data.success) {
+                console.error("Order creation failed");
+                return;
+            }
+
+            const options = {
+                key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+                amount: data.order.amount,
+                currency: "INR",
+                name: "Voice Assistant",
+                description: `${selectedPlan} Plan`,
+                order_id: data.order.id,
+                handler: async (response) => {
+                    try {
+                        const verifyResponse = await axios.post(
+                            `${SeverUrl}/api/billing/verify-payment`,
+                            {
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature,
+                            },
+                            { withCredentials: true }
+                        );
+
+                        const verifyData = verifyResponse.data;
+                        if (verifyData.success) {
+                            alert("Payment verified successfully!");
+                            window.location.reload();
+                        } else {
+                            alert("Payment verification failed.");
+                        }
+                    } catch (error) {
+                        console.error("Verification error:", error);
+                    }
+                },
+                theme: {
+                    color: "#06b6d4",
+                },
+            };
+
+            const rzp1 = new window.Razorpay(options);
+            rzp1.open();
+        } catch (error) {
+            console.error("Payment error:", error);
+        }
+    };
 
     const usagePercent = (usageData.responses.used / usageData.responses.total) * 100;
 
@@ -117,6 +174,7 @@ function Billing() {
                                 </div>
                             </div>
                             <button className="px-5 py-2 rounded-xl text-[13px] font-semibold transition-all duration-300 cursor-pointer"
+                                onClick={handlePay}
                                 style={{background: "linear-gradient(90deg, #00ffaa, #06d6a0, #06b6d4)",color: "#08080c",boxShadow: "0 0 20px rgba(0,255,170,0.15)",}}
                                 onMouseEnter={(e) => {e.currentTarget.style.boxShadow = "0 0 30px rgba(0,255,170,0.3)";e.currentTarget.style.transform = "translateY(-1px)";}}
                                 onMouseLeave={(e) => {e.currentTarget.style.boxShadow = "0 0 20px rgba(0,255,170,0.15)";e.currentTarget.style.transform = "translateY(0)";}}>
@@ -363,6 +421,7 @@ function Billing() {
 
                             {/* CTA */}
                             <button
+                                onClick={!plan.current ? handlePay : undefined}
                                 className="w-full py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-300 cursor-pointer"
                                 style={{ background: plan.current
                                         ? "rgba(255,255,255,0.04)"

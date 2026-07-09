@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const authRouter = require('./Routes/auth.routes');
 const userRouter = require('./Routes/user.routes');
 const assistantRoute = require('./Routes/assistant.route');
+const billingRoute = require('./Routes/billing.route');
 require('dotenv').config();
 const app = express();
 
@@ -25,4 +26,5 @@ app.get('/', (req, res) => {
 app.use("/api/auth",privateCors, authRouter);
 app.use("/api/user",privateCors, userRouter);
 app.use("/api/assistant",publicCors, assistantRoute);
+app.use("/api/billing",privateCors, billingRoute);
 module.exports = app;
