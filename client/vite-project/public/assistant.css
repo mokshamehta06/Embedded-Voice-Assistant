@@ -330,29 +330,23 @@
 .voiceass.theme-neon .va-welcome-sub {
     color: rgba(255, 255, 255, 0.45);
 }
-
 .voiceass.theme-light .va-welcome-sub {
     color: rgba(0, 0, 0, 0.45);
 }
-
 .va-welcome-cta {
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.02em;
 }
-
 .voiceass.theme-dark .va-welcome-cta,
 .voiceass.theme-glass .va-welcome-cta,
 .voiceass.theme-neon .va-welcome-cta {
     color: #00ffaa;
     text-shadow: 0 0 20px rgba(0, 255, 170, 0.3);
 }
-
 .voiceass.theme-light .va-welcome-cta {
     color: #059669;
 }
-
-
 /* ═══════════════════════════════════════════════════════
    MESSAGES
    ═══════════════════════════════════════════════════════ */

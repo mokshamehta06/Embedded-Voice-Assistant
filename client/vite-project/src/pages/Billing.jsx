@@ -76,45 +76,19 @@ function Billing() {
     const usagePercent = (usageData.responses.used / usageData.responses.total) * 100;
 
     return (
-        <div
-            className="min-h-screen w-full relative overflow-hidden"
-            style={{
-                background: "linear-gradient(180deg, #08080c 0%, #0a0c14 50%, #08080c 100%)",
-            }}
-        >
+        <div className="min-h-screen w-full relative overflow-hidden"
+            style={{ background: "linear-gradient(180deg, #08080c 0%, #0a0c14 50%, #08080c 100%)", }}>
             {/* ── Ambient glows ── */}
-            <div
-                className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full blur-3xl pointer-events-none opacity-20"
-                style={{
-                    background:
-                        "radial-gradient(circle, rgba(6,182,212,0.08), rgba(0,255,170,0.04), transparent 70%)",
-                }}
-            />
-            <div
-                className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full blur-3xl pointer-events-none opacity-15"
-                style={{
-                    background:
-                        "radial-gradient(circle, rgba(139,92,246,0.06), transparent 70%)",
-                }}
-            />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full blur-3xl pointer-events-none opacity-20" style={{ background: "radial-gradient(circle, rgba(6,182,212,0.08), rgba(0,255,170,0.04), transparent 70%)", }} />
+            <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full blur-3xl pointer-events-none opacity-15" style={{ background: "radial-gradient(circle, rgba(139,92,246,0.06), transparent 70%)", }}></div>
 
             {/* ── Page Content ── */}
             <div className="relative z-10 max-w-6xl mx-auto px-6 pt-12 pb-20">
                 {/* Header */}
-                <div
-                    className="mb-10"
-                    style={{ animation: "fadeUp 0.5s ease-out both" }}
-                >
-                    <h1
-                        className="text-3xl sm:text-4xl font-extrabold mb-2"
-                        style={{ color: "rgba(255,255,255,0.92)" }}
-                    >
+                <div className="mb-10" style={{ animation: "fadeUp 0.5s ease-out both" }}>
+                    <h1 className="text-3xl sm:text-4xl font-extrabold mb-2" style={{ color: "rgba(255,255,255,0.92)" }}>
                         Billing &{" "}
-                        <span
-                            style={{
-                                background: "linear-gradient(90deg, #00ffaa, #06b6d4)",
-                                WebkitBackgroundClip: "text",
-                                WebkitTextFillColor: "transparent",
+                        <span style={{ background: "linear-gradient(90deg, #00ffaa, #06b6d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
                                 backgroundClip: "text",
                             }}
                         >
@@ -122,86 +96,44 @@ function Billing() {
                         </span>
                     </h1>
                     <p
-                        className="text-[14px]"
-                        style={{ color: "rgba(255,255,255,0.35)" }}
+                        className="text-[14px]"style={{ color: "rgba(255,255,255,0.35)" }}
                     >
                         Manage your subscription and track your usage.
                     </p>
                 </div>
 
                 {/* ── Current Plan & Usage ── */}
-                <div
-                    className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-10"
-                    style={{ animation: "fadeUp 0.5s ease-out 0.1s both" }}
-                >
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-10" style={{ animation: "fadeUp 0.5s ease-out 0.1s both" }}>
                     {/* Current Plan Card */}
-                    <div
-                        className="lg:col-span-2 rounded-2xl p-6"
-                        style={{
-                            background: "rgba(255,255,255,0.02)",
-                            border: "1px solid rgba(255,255,255,0.06)",
-                        }}
-                    >
+                    <div className="lg:col-span-2 rounded-2xl p-6"style={{background: "rgba(255,255,255,0.02)",border: "1px solid rgba(255,255,255,0.06)"}}>
                         <div className="flex items-center justify-between mb-6">
                             <div>
-                                <p
-                                    className="text-[11px] uppercase tracking-widest mb-1"
-                                    style={{ color: "rgba(255,255,255,0.25)" }}
-                                >
+                                <p className="text-[11px] uppercase tracking-widest mb-1"style={{ color: "rgba(255,255,255,0.25)" }}>
                                     Current Plan
                                 </p>
                                 <div className="flex items-center gap-3">
-                                    <h3
-                                        className="text-xl font-bold"
-                                        style={{ color: "rgba(255,255,255,0.9)" }}
-                                    >
-                                        Free Plan
-                                    </h3>
-                                    <span
-                                        className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full"
-                                        style={{
-                                            background: "rgba(0,255,170,0.1)",
-                                            color: "#00ffaa",
-                                            border: "1px solid rgba(0,255,170,0.2)",
-                                        }}
-                                    >
-                                        Active
-                                    </span>
+                                    <h3 className="text-xl font-bold" style={{ color: "rgba(255,255,255,0.9)" }}>Free Plan</h3>
+                                    <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full" style={{ background: "rgba(0,255,170,0.1)", color: "#00ffaa", border: "1px solid rgba(0,255,170,0.2)", }}>Active</span>
                                 </div>
                             </div>
-                            <button
-                                className="px-5 py-2 rounded-xl text-[13px] font-semibold transition-all duration-300 cursor-pointer"
-                                style={{
-                                    background: "linear-gradient(90deg, #00ffaa, #06d6a0, #06b6d4)",
-                                    color: "#08080c",
-                                    boxShadow: "0 0 20px rgba(0,255,170,0.15)",
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.boxShadow = "0 0 30px rgba(0,255,170,0.3)";
-                                    e.currentTarget.style.transform = "translateY(-1px)";
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.boxShadow = "0 0 20px rgba(0,255,170,0.15)";
-                                    e.currentTarget.style.transform = "translateY(0)";
-                                }}
-                            >
+                            <button className="px-5 py-2 rounded-xl text-[13px] font-semibold transition-all duration-300 cursor-pointer"
+                                style={{background: "linear-gradient(90deg, #00ffaa, #06d6a0, #06b6d4)",color: "#08080c",boxShadow: "0 0 20px rgba(0,255,170,0.15)",}}
+                                onMouseEnter={(e) => {e.currentTarget.style.boxShadow = "0 0 30px rgba(0,255,170,0.3)";e.currentTarget.style.transform = "translateY(-1px)";}}
+                                onMouseLeave={(e) => {e.currentTarget.style.boxShadow = "0 0 20px rgba(0,255,170,0.15)";e.currentTarget.style.transform = "translateY(0)";}}>
                                 Upgrade Plan
                             </button>
                         </div>
-
                         {/* Usage bars */}
                         <div className="space-y-4">
                             {/* AI Responses */}
                             <div>
                                 <div className="flex items-center justify-between mb-2">
-                                    <span
-                                        className="text-[12px] font-medium"
+                                    <span className="text-[12px] font-medium"
                                         style={{ color: "rgba(255,255,255,0.5)" }}
                                     >
                                         AI Responses
                                     </span>
-                                    <span
-                                        className="text-[12px] font-mono"
+                                    <span className="text-[12px] font-mono"
                                         style={{ color: "rgba(255,255,255,0.4)" }}
                                     >
                                         {usageData.responses.used}{" "}
@@ -209,13 +141,8 @@ function Billing() {
                                         {usageData.responses.total}
                                     </span>
                                 </div>
-                                <div
-                                    className="w-full h-2 rounded-full overflow-hidden"
-                                    style={{ background: "rgba(255,255,255,0.05)" }}
-                                >
-                                    <div
-                                        className="h-full rounded-full transition-all duration-700"
-                                        style={{
+                                <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.05)" }}>
+                                    <div className="h-full rounded-full transition-all duration-700" style={{
                                             width: `${usagePercent}%`,
                                             background:
                                                 usagePercent > 80
@@ -233,10 +160,7 @@ function Billing() {
                             {/* Assistants */}
                             <div>
                                 <div className="flex items-center justify-between mb-2">
-                                    <span
-                                        className="text-[12px] font-medium"
-                                        style={{ color: "rgba(255,255,255,0.5)" }}
-                                    >
+                                    <span className="text-[12px] font-medium" style={{ color: "rgba(255,255,255,0.5)" }}>
                                         Assistants
                                     </span>
                                     <span
@@ -248,43 +172,21 @@ function Billing() {
                                         {usageData.assistants.total}
                                     </span>
                                 </div>
-                                <div
-                                    className="w-full h-2 rounded-full overflow-hidden"
-                                    style={{ background: "rgba(255,255,255,0.05)" }}
-                                >
-                                    <div
-                                        className="h-full rounded-full transition-all duration-700"
-                                        style={{
-                                            width: `${(usageData.assistants.used / usageData.assistants.total) * 100}%`,
-                                            background: "linear-gradient(90deg, #8b5cf6, #06b6d4)",
-                                            boxShadow: "0 0 12px rgba(139,92,246,0.2)",
-                                        }}
-                                    />
+                                <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.05)" }}>
+                                    <div className="h-full rounded-full transition-all duration-700" style={{ width: `${(usageData.assistants.used / usageData.assistants.total) * 100}%`, background: "linear-gradient(90deg, #8b5cf6, #06b6d4)", boxShadow: "0 0 12px rgba(139,92,246,0.2)", }}/>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     {/* Quick Stats Card */}
-                    <div
-                        className="rounded-2xl p-6 flex flex-col justify-between"
-                        style={{
-                            background: "rgba(255,255,255,0.02)",
-                            border: "1px solid rgba(255,255,255,0.06)",
-                        }}
-                    >
+                    <div className="rounded-2xl p-6 flex flex-col justify-between" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", }}>
                         <div>
-                            <p
-                                className="text-[11px] uppercase tracking-widest mb-4"
-                                style={{ color: "rgba(255,255,255,0.25)" }}
-                            >
+                            <p className="text-[11px] uppercase tracking-widest mb-4" style={{ color: "rgba(255,255,255,0.25)" }}>
                                 This Month
                             </p>
                             <div className="space-y-4">
                                 <div>
-                                    <div
-                                        className="text-2xl font-bold"
-                                        style={{
+                                    <div className="text-2xl font-bold" style={{
                                             background: "linear-gradient(90deg, #00ffaa, #06b6d4)",
                                             WebkitBackgroundClip: "text",
                                             WebkitTextFillColor: "transparent",
@@ -293,51 +195,26 @@ function Billing() {
                                     >
                                         142
                                     </div>
-                                    <p
-                                        className="text-[11px] mt-0.5"
+                                    <p className="text-[11px] mt-0.5"
                                         style={{ color: "rgba(255,255,255,0.3)" }}
                                     >
                                         Total conversations
                                     </p>
                                 </div>
-                                <div
-                                    className="h-px"
-                                    style={{ background: "rgba(255,255,255,0.05)" }}
-                                />
+                                <div className="h-px" style={{ background: "rgba(255,255,255,0.05)" }}/>
                                 <div>
-                                    <div
-                                        className="text-2xl font-bold"
-                                        style={{ color: "rgba(255,255,255,0.85)" }}
-                                    >
+                                    <div className="text-2xl font-bold" style={{ color: "rgba(255,255,255,0.85)" }}>
                                         $0
                                     </div>
-                                    <p
-                                        className="text-[11px] mt-0.5"
-                                        style={{ color: "rgba(255,255,255,0.3)" }}
-                                    >
+                                    <p className="text-[11px] mt-0.5" style={{ color: "rgba(255,255,255,0.3)" }}>
                                         Amount due
                                     </p>
                                 </div>
                             </div>
                         </div>
-                        <div
-                            className="mt-4 flex items-center gap-2 px-3 py-2 rounded-lg"
-                            style={{
-                                background: "rgba(0,255,170,0.05)",
-                                border: "1px solid rgba(0,255,170,0.1)",
-                            }}
-                        >
-                            <div
-                                className="w-1.5 h-1.5 rounded-full"
-                                style={{
-                                    background: "#00ffaa",
-                                    boxShadow: "0 0 6px rgba(0,255,170,0.5)",
-                                }}
-                            />
-                            <span
-                                className="text-[11px]"
-                                style={{ color: "rgba(0,255,170,0.7)" }}
-                            >
+                        <div className="mt-4 flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: "rgba(0,255,170,0.05)", border: "1px solid rgba(0,255,170,0.1)", }}>
+                            <div className="w-1.5 h-1.5 rounded-full" style={{ background: "#00ffaa", boxShadow: "0 0 6px rgba(0,255,170,0.5)", }}/>
+                            <span className="text-[11px]" style={{ color: "rgba(0,255,170,0.7)" }}>
                                 Renews Jul 30, 2026
                             </span>
                         </div>
@@ -345,21 +222,15 @@ function Billing() {
                 </div>
 
                 {/* ── Billing Cycle Toggle ── */}
-                <div
-                    className="flex items-center justify-center mb-8"
+                <div className="flex items-center justify-center mb-8"
                     style={{ animation: "fadeUp 0.5s ease-out 0.2s both" }}
                 >
-                    <div
-                        className="flex items-center rounded-xl p-1 gap-1"
-                        style={{
+                    <div className="flex items-center rounded-xl p-1 gap-1" style={{
                             background: "rgba(255,255,255,0.03)",
                             border: "1px solid rgba(255,255,255,0.06)",
                         }}
                     >
-                        <button
-                            onClick={() => setBillingCycle("monthly")}
-                            className="px-5 py-2 rounded-lg text-[13px] font-medium transition-all duration-300 cursor-pointer"
-                            style={{
+                        <button onClick={() => setBillingCycle("monthly")} className="px-5 py-2 rounded-lg text-[13px] font-medium transition-all duration-300 cursor-pointer" style={{
                                 background:
                                     billingCycle === "monthly"
                                         ? "rgba(255,255,255,0.08)"
@@ -376,10 +247,7 @@ function Billing() {
                         >
                             Monthly
                         </button>
-                        <button
-                            onClick={() => setBillingCycle("yearly")}
-                            className="px-5 py-2 rounded-lg text-[13px] font-medium transition-all duration-300 cursor-pointer flex items-center gap-2"
-                            style={{
+                        <button onClick={() => setBillingCycle("yearly")} className="px-5 py-2 rounded-lg text-[13px] font-medium transition-all duration-300 cursor-pointer flex items-center gap-2" style={{
                                 background:
                                     billingCycle === "yearly"
                                         ? "rgba(255,255,255,0.08)"
@@ -395,9 +263,7 @@ function Billing() {
                             }}
                         >
                             Yearly
-                            <span
-                                className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
-                                style={{
+                            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full" style={{
                                     background: "rgba(0,255,170,0.12)",
                                     color: "#00ffaa",
                                     border: "1px solid rgba(0,255,170,0.2)",
@@ -410,21 +276,14 @@ function Billing() {
                 </div>
 
                 {/* ── Pricing Cards ── */}
-                <div
-                    className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12"
-                    style={{ animation: "fadeUp 0.5s ease-out 0.3s both" }}
-                >
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12"style={{ animation: "fadeUp 0.5s ease-out 0.3s both" }}>
                     {plans.map((plan, i) => (
-                        <div
-                            key={plan.id}
-                            className="rounded-2xl p-6 transition-all duration-300 relative cursor-pointer group"
+                        <div key={plan.id} className="rounded-2xl p-6 transition-all duration-300 relative cursor-pointer group"
                             style={{
-                                background:
-                                    selectedPlan === plan.id
+                                background:selectedPlan === plan.id
                                         ? "rgba(255,255,255,0.04)"
                                         : "rgba(255,255,255,0.02)",
-                                border:
-                                    selectedPlan === plan.id
+                                border:selectedPlan === plan.id
                                         ? `1px solid ${plan.color}30`
                                         : "1px solid rgba(255,255,255,0.06)",
                                 boxShadow:
@@ -447,73 +306,34 @@ function Billing() {
                                     e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
                                     e.currentTarget.style.transform = "translateY(0)";
                                 }
-                            }}
-                        >
+                            }}>
                             {/* Popular badge */}
                             {plan.popular && (
-                                <div
-                                    className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider"
-                                    style={{
-                                        background: `linear-gradient(90deg, ${plan.color}, #00ffaa)`,
-                                        color: "#08080c",
-                                        boxShadow: `0 0 20px ${plan.color}30`,
-                                    }}
-                                >
+                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider"
+                                    style={{ background: `linear-gradient(90deg, ${plan.color}, #00ffaa)`, color: "#08080c", boxShadow: `0 0 20px ${plan.color}30`, }}>
                                     Most Popular
                                 </div>
                             )}
-
                             {/* Current badge */}
                             {plan.current && (
-                                <div
-                                    className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider"
-                                    style={{
-                                        background: "rgba(255,255,255,0.06)",
-                                        color: "rgba(255,255,255,0.5)",
-                                        border: "1px solid rgba(255,255,255,0.1)",
-                                    }}
-                                >
+                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wider"
+                                    style={{background: "rgba(255,255,255,0.06)",color: "rgba(255,255,255,0.5)",border: "1px solid rgba(255,255,255,0.1)",}}>
                                     Current Plan
                                 </div>
                             )}
-
                             {/* Plan name */}
                             <div className="mt-2 mb-4">
-                                <h3
-                                    className="text-lg font-bold mb-1"
-                                    style={{ color: plan.color }}
-                                >
-                                    {plan.name}
-                                </h3>
-                                <p
-                                    className="text-[12px]"
-                                    style={{ color: "rgba(255,255,255,0.3)" }}
-                                >
-                                    {plan.description}
-                                </p>
+                                <h3 className="text-lg font-bold mb-1" style={{ color: plan.color }}>{plan.name}</h3>
+                                <p className="text-[12px]"style={{ color: "rgba(255,255,255,0.3)"}}>{plan.description}</p>
                             </div>
-
                             {/* Price */}
                             <div className="mb-6">
                                 <div className="flex items-baseline gap-1">
-                                    <span
-                                        className="text-4xl font-extrabold"
-                                        style={{ color: "rgba(255,255,255,0.9)" }}
-                                    >
-                                        ${plan.price[billingCycle]}
-                                    </span>
-                                    <span
-                                        className="text-[12px]"
-                                        style={{ color: "rgba(255,255,255,0.25)" }}
-                                    >
-                                        /{billingCycle === "monthly" ? "mo" : "yr"}
-                                    </span>
+                                    <span className="text-4xl font-extrabold" style={{ color: "rgba(255,255,255,0.9)"}}>${plan.price[billingCycle]}</span>
+                                    <span className="text-[12px]"style={{ color: "rgba(255,255,255,0.25)" }}>/{billingCycle === "monthly" ? "mo" : "yr"}</span>
                                 </div>
                                 {billingCycle === "yearly" && plan.price.yearly > 0 && (
-                                    <p
-                                        className="text-[11px] mt-1"
-                                        style={{ color: "rgba(0,255,170,0.5)" }}
-                                    >
+                                    <p className="text-[11px] mt-1"style={{ color: "rgba(0,255,170,0.5)" }}>
                                         Save ${plan.price.monthly * 12 - plan.price.yearly}/year
                                     </p>
                                 )}
@@ -523,48 +343,20 @@ function Billing() {
                             <div className="space-y-2.5 mb-6">
                                 {plan.features.map((feature, j) => (
                                     <div key={j} className="flex items-start gap-2.5">
-                                        <svg
-                                            className="w-4 h-4 mt-0.5 flex-shrink-0"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke={plan.color}
-                                            strokeWidth={2}
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M4.5 12.75l6 6 9-13.5"
-                                            />
+                                        <svg className="w-4 h-4 mt-0.5 flex-shrink-0" viewBox="0 0 24 24"fill="none"stroke={plan.color}strokeWidth={2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
                                         </svg>
-                                        <span
-                                            className="text-[12px]"
-                                            style={{ color: "rgba(255,255,255,0.5)" }}
-                                        >
-                                            {feature}
-                                        </span>
+                                        <span className="text-[12px]"style={{ color: "rgba(255,255,255,0.5)" }}>{feature}</span>
                                     </div>
                                 ))}
                                 {plan.limitations.map((limit, j) => (
                                     <div key={`l-${j}`} className="flex items-start gap-2.5">
-                                        <svg
-                                            className="w-4 h-4 mt-0.5 flex-shrink-0"
+                                        <svg className="w-4 h-4 mt-0.5 flex-shrink-0"
                                             viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="rgba(255,255,255,0.15)"
-                                            strokeWidth={2}
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M6 18L18 6M6 6l12 12"
-                                            />
+                                            fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth={2}>
+                                            <path strokeLinecap="round"strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
                                         </svg>
-                                        <span
-                                            className="text-[12px]"
-                                            style={{ color: "rgba(255,255,255,0.2)" }}
-                                        >
-                                            {limit}
-                                        </span>
+                                        <span className="text-[12px]" style={{ color: "rgba(255,255,255,0.2)" }}>{limit}</span>
                                     </div>
                                 ))}
                             </div>
@@ -572,8 +364,7 @@ function Billing() {
                             {/* CTA */}
                             <button
                                 className="w-full py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-300 cursor-pointer"
-                                style={{
-                                    background: plan.current
+                                style={{ background: plan.current
                                         ? "rgba(255,255,255,0.04)"
                                         : selectedPlan === plan.id
                                         ? `linear-gradient(90deg, ${plan.color}, ${plan.color}cc)`
@@ -606,29 +397,15 @@ function Billing() {
                 </div>
 
                 {/* ── Divider ── */}
-                <div
-                    className="flex items-center gap-4 mb-10"
-                    style={{ animation: "fadeUp 0.5s ease-out 0.5s both" }}
-                >
-                    <div
-                        className="flex-1 h-px"
-                        style={{ background: "rgba(255,255,255,0.05)" }}
-                    />
-                    <span
-                        className="text-[10px] tracking-widest uppercase"
-                        style={{ color: "rgba(255,255,255,0.15)" }}
-                    >
+                <div className="flex items-center gap-4 mb-10"style={{ animation: "fadeUp 0.5s ease-out 0.5s both" }}>
+                    <div className="flex-1 h-px"style={{ background: "rgba(255,255,255,0.05)" }}/>
+                    <span className="text-[10px] tracking-widest uppercase"style={{ color: "rgba(255,255,255,0.15)" }}>
                         Payment History
                     </span>
-                    <div
-                        className="flex-1 h-px"
-                        style={{ background: "rgba(255,255,255,0.05)" }}
-                    />
+                    <div className="flex-1 h-px"style={{ background: "rgba(255,255,255,0.05)" }}/>
                 </div>
-
                 {/* ── Invoices Table ── */}
-                <div
-                    className="rounded-2xl overflow-hidden"
+                <div className="rounded-2xl overflow-hidden"
                     style={{
                         background: "rgba(255,255,255,0.02)",
                         border: "1px solid rgba(255,255,255,0.06)",
@@ -636,8 +413,7 @@ function Billing() {
                     }}
                 >
                     {/* Table Header */}
-                    <div
-                        className="grid grid-cols-5 gap-4 px-6 py-3"
+                    <div className="grid grid-cols-5 gap-4 px-6 py-3"
                         style={{
                             background: "rgba(255,255,255,0.02)",
                             borderBottom: "1px solid rgba(255,255,255,0.05)",
@@ -698,10 +474,8 @@ function Billing() {
                             >
                                 {invoice.amount}
                             </span>
-                            <span
-                                className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full w-fit"
-                                style={{
-                                    background: "rgba(0,255,170,0.08)",
+                            <span className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full w-fit"
+                                style={{ background: "rgba(0,255,170,0.08)",
                                     color: "rgba(0,255,170,0.6)",
                                     border: "1px solid rgba(0,255,170,0.12)",
                                 }}

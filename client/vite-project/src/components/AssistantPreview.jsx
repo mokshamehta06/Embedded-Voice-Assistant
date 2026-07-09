@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 /* ── Theme Tokens ── */
 const themes = {
     dark: {
@@ -85,7 +84,6 @@ const themes = {
         msgBorder: "1px solid #e5e7eb",
     },
 };
-
 const themeKeys = Object.keys(themes);
 
 function AssistantPreview({ assistant }) {
@@ -168,8 +166,7 @@ function AssistantPreview({ assistant }) {
             {/* Preview card wrapper — provides the "browser" chrome feel */}
             <div className="mx-auto max-w-md">
                 {/* Browser dots */}
-                <div
-                    className="flex items-center gap-1.5 px-4 py-2.5 rounded-t-2xl"
+                <div className="flex items-center gap-1.5 px-4 py-2.5 rounded-t-2xl"
                     style={{
                         background: activeTheme === "dark" ? "#06080f" : activeTheme === "glass" ? "rgba(255,255,255,0.04)" : activeTheme === "minimal" ? "#f0f0f0" : "#e8ecf4",
                         borderTop: activeTheme === "dark" ? "1px solid rgba(255,255,255,0.06)" : activeTheme === "glass" ? "1px solid rgba(255,255,255,0.1)" : "1px solid #d1d5db",
@@ -180,8 +177,7 @@ function AssistantPreview({ assistant }) {
                     <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#ff5f57" }} />
                     <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#febc2e" }} />
                     <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#28c840" }} />
-                    <div
-                        className="ml-3 flex-1 h-5 rounded-md"
+                    <div className="ml-3 flex-1 h-5 rounded-md"
                         style={{
                             background: activeTheme === "dark" ? "rgba(255,255,255,0.04)" : activeTheme === "glass" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
                         }}
@@ -189,8 +185,7 @@ function AssistantPreview({ assistant }) {
                 </div>
 
                 {/* Main preview card */}
-                <div
-                    className="relative rounded-b-2xl overflow-hidden transition-all duration-500"
+                <div className="relative rounded-b-2xl overflow-hidden transition-all duration-500"
                     style={{ ...t.card, borderTop: "none", borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
                 >
                     {/* Overlay */}
@@ -202,8 +197,7 @@ function AssistantPreview({ assistant }) {
                         {/* Orb container */}
                         <div className="relative mb-8">
                             {/* Orb */}
-                            <div
-                                className="w-24 h-24 rounded-full flex items-center justify-center relative cursor-pointer"
+                            <div className="w-24 h-24 rounded-full flex items-center justify-center relative cursor-pointer"
                                 onClick={() => !isListening && setIsListening(true)}
                                 style={{
                                     background: t.orbGrad,
@@ -213,8 +207,7 @@ function AssistantPreview({ assistant }) {
                                 }}
                             >
                                 {/* Inner shimmer */}
-                                <div
-                                    className="absolute inset-1 rounded-full"
+                                <div className="absolute inset-1 rounded-full"
                                     style={{
                                         background: "conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.2) 25%, transparent 50%, rgba(255,255,255,0.15) 75%, transparent 100%)",
                                         animation: "spin 5s linear infinite",
@@ -269,8 +262,7 @@ function AssistantPreview({ assistant }) {
                         </h3>
 
                         {/* Status text */}
-                        <p
-                            className="text-[13px] mb-7 transition-all duration-300"
+                        <p className="text-[13px] mb-7 transition-all duration-300"
                             style={{
                                 color: isListening ? t.statusActive : t.sub,
                                 animation: isListening ? "textPulse 1.5s ease-in-out infinite" : "none",
@@ -280,8 +272,7 @@ function AssistantPreview({ assistant }) {
                         </p>
 
                         {/* Action button */}
-                        <button
-                            onClick={() => !isListening && setIsListening(true)}
+                        <button onClick={() => !isListening && setIsListening(true)}
                             className="px-7 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-300 hover:opacity-90 active:scale-95 cursor-pointer"
                             style={{
                                 background: t.btnBg,
@@ -293,22 +284,10 @@ function AssistantPreview({ assistant }) {
                         </button>
 
                         {/* Chat bubble */}
-                        <div
-                            className="mt-7 w-full rounded-xl p-4 transition-all duration-300"
-                            style={{
-                                background: t.msgBg,
-                                border: t.msgBorder,
-                            }}
-                        >
+                        <div className="mt-7 w-full rounded-xl p-4 transition-all duration-300" style={{ background: t.msgBg, border: t.msgBorder }}>
                             <div className="flex items-start gap-3">
-                                <div
-                                    className="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-[11px] font-bold"
-                                    style={{
-                                        background: t.orbGrad,
-                                        color: "#fff",
-                                    }}
+                                <div className="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-[11px] font-bold" style={{ background: t.orbGrad, color: "#fff" }}
                                 >
-                                    S
                                 </div>
                                 <p className="text-[12px] leading-relaxed" style={{ color: t.sub }}>
                                     👋 Hello! I'm your AI assistant. How can I help you today? Ask me about products, pricing, or anything else!

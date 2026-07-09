@@ -11,7 +11,6 @@
     const CLIENT_URL = "http://localhost:5173";
 
     let assistantConfig = null;
-
     // Load CSS
     const link = document.createElement("link");
     link.href = CLIENT_URL + "/assistant.css";

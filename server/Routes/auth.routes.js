@@ -7,5 +7,4 @@ const authRouter = express.Router()
 authRouter.post("/google", googleAuth)
 authRouter.post("/logout", logout)
 
-
 module.exports = authRouter

@@ -33,9 +33,7 @@ const generateGeminiResponse = async ({
             "invalid";
             await user.save();
         }
-        if(
-            response.status === 429
-        ){
+        if(response.status === 429){
             user.geminiStatus = "Quota Exceeded";
             await user.save();
         }
