@@ -84,7 +84,8 @@ function Billing() {
 
             const data = response.data;
             if (!data.success) {
-                console.error("Order creation failed");
+                console.error("Order creation failed", data);
+                alert("Order creation failed: " + (data.message || "Unknown error"));
                 return;
             }
 
@@ -123,10 +124,19 @@ function Billing() {
                 },
             };
 
+            if (!window.Razorpay) {
+                alert("Razorpay SDK failed to load. Please check your internet connection or disable any ad-blockers.");
+                return;
+            }
+
             const rzp1 = new window.Razorpay(options);
+            rzp1.on('payment.failed', function (response){
+                alert("Payment Failed: " + response.error.description);
+            });
             rzp1.open();
         } catch (error) {
             console.error("Payment error:", error);
+            alert("Payment error: " + (error.response?.data?.message || error.message));
         }
     };
 
@@ -145,10 +155,7 @@ function Billing() {
                 <div className="mb-10" style={{ animation: "fadeUp 0.5s ease-out both" }}>
                     <h1 className="text-3xl sm:text-4xl font-extrabold mb-2" style={{ color: "rgba(255,255,255,0.92)" }}>
                         Billing &{" "}
-                        <span style={{ background: "linear-gradient(90deg, #00ffaa, #06b6d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-                                backgroundClip: "text",
-                            }}
-                        >
+                        <span style={{ background: "linear-gradient(90deg, #00ffaa, #06b6d4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",backgroundClip: "text",}}>
                             Plans
                         </span>
                     </h1>
@@ -557,15 +564,8 @@ function Billing() {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             {/* Card icon */}
-                            <div
-                                className="w-12 h-8 rounded-lg flex items-center justify-center"
-                                style={{
-                                    background: "rgba(255,255,255,0.04)",
-                                    border: "1px solid rgba(255,255,255,0.08)",
-                                }}
-                            >
-                                <svg
-                                    className="w-6 h-6"
+                            <div className="w-12 h-8 rounded-lg flex items-center justify-center" style={{background: "rgba(255,255,255,0.04)",border: "1px solid rgba(255,255,255,0.08)",}}>
+                                <svg className="w-6 h-6"
                                     viewBox="0 0 24 24"
                                     fill="none"
                                     stroke="rgba(255,255,255,0.4)"
@@ -579,27 +579,17 @@ function Billing() {
                                 </svg>
                             </div>
                             <div>
-                                <p
-                                    className="text-[13px] font-medium"
-                                    style={{ color: "rgba(255,255,255,0.6)" }}
-                                >
+                                <p className="text-[13px] font-medium"style={{ color: "rgba(255,255,255,0.6)" }}>
                                     No payment method added
                                 </p>
-                                <p
-                                    className="text-[11px]"
+                                <p className="text-[11px]"
                                     style={{ color: "rgba(255,255,255,0.25)" }}
                                 >
                                     Add a card to upgrade your plan
                                 </p>
                             </div>
                         </div>
-                        <button
-                            className="px-4 py-2 rounded-lg text-[12px] font-medium transition-all duration-300 cursor-pointer"
-                            style={{
-                                background: "rgba(255,255,255,0.04)",
-                                color: "rgba(255,255,255,0.5)",
-                                border: "1px solid rgba(255,255,255,0.08)",
-                            }}
+                        <button className="px-4 py-2 rounded-lg text-[12px] font-medium transition-all duration-300 cursor-pointer" style={{ background: "rgba(255,255,255,0.04)",color: "rgba(255,255,255,0.5)",border: "1px solid rgba(255,255,255,0.08)",}}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.background = "rgba(255,255,255,0.08)";
                                 e.currentTarget.style.color = "rgba(255,255,255,0.8)";

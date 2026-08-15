@@ -356,10 +356,10 @@ function Builder({ user, setUser }) {
                                     lineHeight: 1.6,
                                 }}
                             >
-{`<body>
-  Your Website Content
-  <script src="${ClientUrl}/assistant.js" data-user-id="${user?._id}"></script>
-</body>`}
+                                {`<body>
+                            Your Website Content
+                            <script src="${ClientUrl}/assistant.js" data-user-id="${user?._id}"></script>
+                            </body>`}
                             </pre>
 
                             {/* Where to paste info */}
@@ -431,22 +431,9 @@ function Builder({ user, setUser }) {
                     </div>
                 )}
                 {(!user.isSetupComplete || editAssistant) && (<>
-                    <div className="rounded-2xl p-6 mb-6"
-                        style={{
-                            background: "rgba(255,255,255,0.02)",
-                            border: "1px solid rgba(255,255,255,0.06)",
-                            animation: "fadeUp 0.5s ease-out 0.1s both",
-                        }}
-                    >
-                        <h2 className="text-[15px] font-bold mb-5 flex items-center gap-2"
-                            style={{ color: "rgba(255,255,255,0.85)" }}
-                        >
-                            <div className="w-8 h-8 rounded-lg flex items-center justify-center"
-                                style={{
-                                    background: "rgba(0,255,170,0.08)",
-                                    border: "1px solid rgba(0,255,170,0.15)",
-                                }}
-                            >
+                    <div className="rounded-2xl p-6 mb-6" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", animation: "fadeUp 0.5s ease-out 0.1s both", }}>
+                        <h2 className="text-[15px] font-bold mb-5 flex items-center gap-2" style={{ color: "rgba(255,255,255,0.85)" }}>
+                            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "rgba(0,255,170,0.08)", border: "1px solid rgba(0,255,170,0.15)", }}>
                                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#00ffaa" strokeWidth={1.5}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                                 </svg>
@@ -456,28 +443,11 @@ function Builder({ user, setUser }) {
 
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-[11px] uppercase tracking-widest mb-2 font-semibold"
-                                    style={{ color: "rgba(255,255,255,0.3)" }}
-                                >
-                                    Assistant Name
-                                </label>
-                                <input type="text"
-                                    value={form.assistantName}
-                                    onChange={(e) =>
-                                        handleChange("assistantName", e.target.value)
-                                    }
-                                    placeholder="e.g. Shifra"
-                                    className="w-full px-4 py-3 rounded-xl text-[13px] transition-all duration-200"
-                                    style={inputStyle}
-                                    {...inputFocusHandlers}
-                                />
+                                <label className="block text-[11px] uppercase tracking-widest mb-2 font-semibold" style={{ color: "rgba(255,255,255,0.3)" }}>Assistant Name</label>
+                                <input type="text" value={form.assistantName} onChange={(e) => handleChange("assistantName", e.target.value)} placeholder="e.g. Shifra" className="w-full px-4 py-3 rounded-xl text-[13px] transition-all duration-200" style={inputStyle}{...inputFocusHandlers} />
                             </div>
                             <div>
-                                <label className="block text-[11px] uppercase tracking-widest mb-2 font-semibold"
-                                    style={{ color: "rgba(255,255,255,0.3)" }}
-                                >
-                                    Business Name
-                                </label>
+                                <label className="block text-[11px] uppercase tracking-widest mb-2 font-semibold" style={{ color: "rgba(255,255,255,0.3)" }}>Business Name</label>
                                 <input
                                     type="text"
                                     value={form.businessName}
@@ -491,9 +461,21 @@ function Builder({ user, setUser }) {
                                 />
                             </div>
                             <div>
-                                <label className="block text-[11px] uppercase tracking-widest mb-2 font-semibold"
-                                    style={{ color: "rgba(255,255,255,0.3)" }}
-                                >
+                                <label className="block text-[11px] uppercase tracking-widest mb-2 font-semibold" style={{ color: "rgba(255,255,255,0.3)" }}>Business Type</label>
+                                <input
+                                    type="text"
+                                    value={form.businessType}
+                                    onChange={(e) =>
+                                        handleChange("businessType", e.target.value)
+                                    }
+                                    placeholder="Your business name"
+                                    className="w-full px-4 py-3 rounded-xl text-[13px] transition-all duration-200"
+                                    style={inputStyle}
+                                    {...inputFocusHandlers}
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-[11px] uppercase tracking-widest mb-2 font-semibold" style={{ color: "rgba(255,255,255,0.3)" }}>
                                     Business Type
                                 </label>
                                 <input
@@ -759,10 +741,7 @@ function Builder({ user, setUser }) {
                         >
                             <div
                                 className="w-8 h-8 rounded-lg flex items-center justify-center"
-                                style={{
-                                    background: "rgba(0,255,170,0.08)",
-                                    border: "1px solid rgba(0,255,170,0.15)",
-                                }}
+                                style={{background: "rgba(0,255,170,0.08)",border: "1px solid rgba(0,255,170,0.15)",}}
                             >
                                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#00ffaa" strokeWidth={1.5}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
@@ -770,13 +749,11 @@ function Builder({ user, setUser }) {
                             </div>
                             Website Pages
                         </h2>
-                        <p
-                            className="text-[12px] mb-5 ml-10"
+                        <p className="text-[12px] mb-5 ml-10"
                             style={{ color: "rgba(255,255,255,0.25)" }}
                         >
                             Add pages so the assistant can navigate visitors
                         </p>
-
                         {/* Existing pages */}
                         {form.pages.length > 0 && (
                             <div className="space-y-2 mb-5">
@@ -805,14 +782,12 @@ function Builder({ user, setUser }) {
                                                 </span>
                                             </div>
                                             <div className="min-w-0">
-                                                <p
-                                                    className="text-[13px] font-medium truncate"
+                                                <p className="text-[13px] font-medium truncate"
                                                     style={{ color: "rgba(255,255,255,0.7)" }}
                                                 >
                                                     {page.name}
                                                 </p>
-                                                <p
-                                                    className="text-[11px] font-mono truncate"
+                                                <p className="text-[11px] font-mono truncate"
                                                     style={{ color: "rgba(255,255,255,0.25)" }}
                                                 >
                                                     {page.path}
@@ -932,13 +907,12 @@ function Builder({ user, setUser }) {
                         >
                             <div
                                 className="w-8 h-8 rounded-lg flex items-center justify-center"
-                                style={{
-                                    background: "rgba(6,182,212,0.08)",
-                                    border: "1px solid rgba(6,182,212,0.15)",
-                                }}
+                                style={{background: "rgba(6,182,212,0.08)",border: "1px solid rgba(6,182,212,0.15)",}}
                             >
                                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth={1.5}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                                    <path strokeLinecap="round" 
+                                    strokeLinejoin="round" 
+                                    d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
                                 </svg>
                             </div>
                             API Configuration
@@ -971,8 +945,7 @@ function Builder({ user, setUser }) {
                                 >
                                     <div
                                         className="w-1.5 h-1.5 rounded-full"
-                                        style={{
-                                            background: "#00ffaa",
+                                        style={{ background: "#00ffaa",
                                             boxShadow: "0 0 6px rgba(0,255,170,0.5)",
                                         }}
                                     />
@@ -1056,41 +1029,16 @@ function Builder({ user, setUser }) {
                             <span className="relative z-10 flex items-center gap-2">
                                 {saving ? (
                                     <>
-                                        <svg
-                                            className="w-4 h-4 animate-spin"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                        >
-                                            <circle
-                                                className="opacity-25"
-                                                cx="12"
-                                                cy="12"
-                                                r="10"
-                                                stroke="currentColor"
-                                                strokeWidth="4"
-                                            />
-                                            <path
-                                                className="opacity-75"
-                                                fill="currentColor"
-                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                            />
+                                        <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
                                         </svg>
                                         Saving...
                                     </>
                                 ) : (
                                     <>
-                                        <svg
-                                            className="w-4 h-4"
-                                            viewBox="0 0 24 24"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeWidth={2}
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M4.5 12.75l6 6 9-13.5"
-                                            />
+                                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
                                         </svg>
                                         Save Assistant
                                     </>

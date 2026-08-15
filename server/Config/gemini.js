@@ -1,4 +1,4 @@
-const Gemini_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key="
+const Gemini_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-lite-latest:generateContent?key="
 
 const generateGeminiResponse = async ({
     prompt,
@@ -34,11 +34,16 @@ const generateGeminiResponse = async ({
             await user.save();
         }
         if(response.status === 429){
-            user.geminiStatus = "Quota Exceeded";
+            user.geminiStatus = "quota_exceeded";
             await user.save();
         }
-        const err = 
-        await response.text();
+        const err = await response.text();
+        
+        if (response.status === 429 || response.status === 403) {
+             console.log("Gemini API Quota Exceeded. Returning Mock Response.");
+             return `Hello! As an interview demo, I am currently running in offline mode because the AI quota is exhausted. However, my voice navigation still works! Try saying "open pricing page".`;
+        }
+
         throw new Error(err);
        } 
        user.geminiStatus =

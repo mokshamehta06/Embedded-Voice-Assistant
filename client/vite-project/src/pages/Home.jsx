@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import AssistantPreview from "../components/AssistantPreview";
+import ScrollFadeText from "../components/ScrollFadeText";
 
 function Home({ user }) {
     const navigate = useNavigate();
@@ -127,6 +128,29 @@ function Home({ user }) {
 
             {/* ── Assistant Preview ── */}
             <AssistantPreview />
+
+            {/* ── Scroll Fade Text — Cinematic Statement ── */}
+            <div className="relative z-10 py-32 sm:py-44 px-6">
+                {/* Ambient glow behind the text */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full blur-3xl pointer-events-none opacity-20"
+                    style={{ background: "radial-gradient(circle, rgba(0,255,170,0.12), rgba(6,182,212,0.06), transparent 70%)" }}
+                />
+
+                <div className="max-w-4xl mx-auto text-center">
+                    <ScrollFadeText
+                        text="We believe every website deserves an intelligent voice — an AI that listens, understands, and speaks like a human. Build once, embed anywhere, and let your assistant handle the rest."
+                        className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-snug tracking-tight"
+                        style={{ color: "rgba(255,255,255,0.9)", justifyContent: "center" }}
+                    />
+
+                    <ScrollFadeText
+                        text="No code. No complexity. Just pure conversational intelligence, ready in minutes."
+                        className="mt-8 text-lg sm:text-xl font-medium leading-relaxed max-w-2xl mx-auto"
+                        style={{ color: "rgba(255,255,255,0.35)", justifyContent: "center" }}
+                        scrollOffset={["start 0.85", "start 0.3"]}
+                    />
+                </div>
+            </div>
 
             {/* ── Features Section ── */}
             <div
@@ -290,7 +314,7 @@ function Home({ user }) {
                     ))}
                 </div>
             </div>
-            
+
             {/* ── Get Started Section ── */}
             <div className="relative z-10 max-w-5xl mx-auto px-6 pb-20">
                 <div className="text-center mb-12">

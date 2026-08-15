@@ -10,13 +10,13 @@ const createOrder = async (req, res) => {
         let amount = 0;
 
         if (plan === "pro") {
-            amount = 299;
+            amount = 99;
         }
 
         const order = await razorpay.orders.create({
             amount: amount * 100,
             currency: "INR",
-            receipt: `receipt_${Date.now()}`
+            receipt: "receipt_" + Date.now()
         });
 
         await Billing.create({
@@ -32,10 +32,10 @@ const createOrder = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
+        console.error("Server-side order creation error:", error);
         return res.status(500).json({
             success: false,
-            message: "order creation failed"
+            message: error.message || "order creation failed"
         });
     }
 };

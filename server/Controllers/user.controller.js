@@ -12,7 +12,7 @@ const getCurrent = async (req,res) => {
         return res.status(500).json({message: error.message || "Internal Server Error"});
     }
 }
-    const getAssistantConfig = async (req, res) => {
+const getAssistantConfig = async (req, res) => {
     try {
         const user = await User.findById(req.params.userId).select(
             'assistantName businessName businessType businessDescription tone theme enableVoice enableNavigation pages'

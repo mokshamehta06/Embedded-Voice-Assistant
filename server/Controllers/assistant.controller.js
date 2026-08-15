@@ -5,8 +5,6 @@ const getAssistantConfig = async (req, res) => {
     try {
         const { userId } = req.params;
 
-        // Select the fields the widget needs to build itself. 
-        // We do NOT send geminiApiKey to the public frontend for security!
         const user = await User.findById(userId).select(
             "assistantName businessName businessType businessDescription tone theme enableVoice enableNavigation pages"
         );

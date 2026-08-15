@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy, Component, useEffect } from "react";
+import React, { useState, Suspense, lazy, Component, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../utils/firebase";
@@ -89,6 +89,19 @@ function Login({ setUser }) {
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [hoveredCard, setHoveredCard] = useState(null);
+    const [splineReady, setSplineReady] = useState(false);
+    const splineContainerRef = useRef(null);
+
+    // Delay Spline load to ensure container has layout dimensions (prevents WebGL zero-size crash)
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            const el = splineContainerRef.current;
+            if (el && el.offsetWidth > 0 && el.offsetHeight > 0) {
+                setSplineReady(true);
+            }
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, []);
 
 
     useEffect(() => {
@@ -125,8 +138,12 @@ function Login({ setUser }) {
     };
     const handleLogin=async ()=>{
         try{
+            console.log("Starting Google sign-in popup...");
             const result=await signInWithPopup(auth,provider)
             const {displayName,email}=result.user
+            console.log("Firebase auth success:", displayName, email);
+            
+            console.log("Sending to backend:", SeverUrl + "/api/auth/google");
             const res = await axios.post(
                 SeverUrl + "/api/auth/google",
                 {
@@ -143,8 +160,12 @@ function Login({ setUser }) {
             }
         }
         catch(error){
-            console.log(error)
-            toast.error("Login failed. Please try again.");
+            console.log("Login error details:", error?.code, error?.message, error);
+            if (error?.code?.startsWith("auth/")) {
+                toast.error(`Google sign-in failed: ${error.code}`);
+            } else {
+                toast.error("Login failed. Please try again.");
+            }
         }
     }
     
@@ -152,13 +173,17 @@ function Login({ setUser }) {
         <div className="h-screen w-full flex overflow-hidden relative bg-black">
 
             {/* ══════ LEFT: Spline 3D (takes full left half, seamless black bg) ══════ */}
-            <div className="hidden lg:block w-[50%] relative">
+            <div className="hidden lg:block w-[50%] relative" ref={splineContainerRef}>
                 <div className="absolute inset-0">
-                    <SplineErrorBoundary fallback={<SplineFallback />}>
-                        <Suspense fallback={<SplineFallback />}>
-                            <Spline scene={SPLINE_SCENE_URL} style={{ width: "100%", height: "100%" }} />
-                        </Suspense>
-                    </SplineErrorBoundary>
+                    {splineReady ? (
+                        <SplineErrorBoundary fallback={<SplineFallback />}>
+                            <Suspense fallback={<SplineFallback />}>
+                                <Spline scene={SPLINE_SCENE_URL} style={{ width: "100%", height: "100%" }} />
+                            </Suspense>
+                        </SplineErrorBoundary>
+                    ) : (
+                        <SplineFallback />
+                    )}
                 </div>
                 {/* Soft edge fade into right panel */}
                 <div className="absolute top-0 right-0 bottom-0 w-40 pointer-events-none z-10"
@@ -308,13 +333,9 @@ function Login({ setUser }) {
                 </div>
             </div>
 
-            {/* Mobile Spline fallback */}
+            {/* Mobile: use the lightweight CSS fallback instead of Spline (prevents WebGL crash on smaller GPUs) */}
             <div className="lg:hidden absolute top-0 left-0 right-0 h-[250px] z-0 opacity-30">
-                <SplineErrorBoundary fallback={<SplineFallback />}>
-                    <Suspense fallback={<SplineFallback />}>
-                        <Spline scene={SPLINE_SCENE_URL} style={{ width: "100%", height: "100%" }} />
-                    </Suspense>
-                </SplineErrorBoundary>
+                <SplineFallback />
                 <div className="absolute bottom-0 left-0 right-0 h-24"
                     style={{ background: "linear-gradient(to top, #08080c, transparent)" }} />
             </div>
